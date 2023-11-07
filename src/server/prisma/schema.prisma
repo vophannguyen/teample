@@ -10,17 +10,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id       Int    @id @default(autoincrement())
-  username String @unique
-  password String
-  tasks    Task[]
-}
-
-model Task {
-  id          Int     @id @default(autoincrement())
-  description String
-  done        Boolean @default(false)
-  userId      Int
-  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+model Student {
+  id Int @id @unique @default(autoincrement())
+  firstname String 
+  lastname String
+  email String @unique
+  imageURL String
+  gpa Int
 }
