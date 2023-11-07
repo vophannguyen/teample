@@ -10,11 +10,4 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Student {
-  id Int @id @unique @default(autoincrement())
-  firstname String 
-  lastname String
-  email String @unique
-  imageURL String
-  gpa Int
-}
+
