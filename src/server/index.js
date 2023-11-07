@@ -3,6 +3,7 @@ const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
 const { createServer: createViteServer } = require("vite");
+const cors = require("cors");
 
 const PORT = process.env.PORT ?? 8080;
 
@@ -12,7 +13,7 @@ const PORT = process.env.PORT ?? 8080;
  */
 const createApp = async () => {
   const app = express();
-
+  app.use(cors);
   // Logging middleware
   app.use(morgan("dev"));
 
