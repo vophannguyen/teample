@@ -14,8 +14,10 @@ const StudentCard = ({ student }) => {
 
 
 export default function Students() {
-  const { data: students, isLoading } = useGetStudentsQuery();
-
+  const { data: students, isLoading, isError } = useGetStudentsQuery();
+  console.log("students", students);
+  console.log("loading", isLoading);
+  console.log("error", isError);
   //additional features: add filter
   return (
     <div className="students">
