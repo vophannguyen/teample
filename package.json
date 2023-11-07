@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon src/server/index.js",
     "build": "vite build",
-    "start": "node src/server"
+    "start": "vite"
   },
   "prisma": {
     "schema": "src/server/prisma/schema.prisma",
