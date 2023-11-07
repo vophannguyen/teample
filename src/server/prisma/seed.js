@@ -1,18 +1,45 @@
-const prisma = require("../prisma");
+const prisma = require(".");
 
 /** Seeds the database with a user and some tasks */
 const seed = async () => {
-  await prisma.user.create({
+  await prisma.student.create({
     data: {
-      username: "foo",
-      password: "bar",
-      tasks: {
-        create: [
-          { description: "task 1" },
-          { description: "task 2" },
-          { description: "task 3" },
-        ],
-      },
+      firstName: "nguyen",
+      lastName: "Vo",
+      email: "vophannguyen@gmail.com",
+      imageUrl:
+        "https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg",
+      gpa: 3.9,
+    },
+  });
+  await prisma.student.create({
+    data: {
+      firstName: "Anna",
+      lastName: "WaterHouse",
+      email: "ana@gmail.com",
+      imageUrl:
+        "https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg",
+      gpa: 3.9,
+    },
+  });
+  await prisma.student.create({
+    data: {
+      firstName: "Courtney",
+      lastName: "Snyder",
+      email: "court@gmail.com",
+      imageUrl:
+        "https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg",
+      gpa: 3.9,
+    },
+  });
+  await prisma.student.create({
+    data: {
+      firstName: "Haru",
+      lastName: "Grossman",
+      email: "haru@gmail.com",
+      imageUrl:
+        "https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg",
+      gpa: 3.9,
     },
   });
 };
