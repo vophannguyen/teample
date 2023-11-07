@@ -6,8 +6,8 @@ import "./Students.less";
 const StudentCard = ({ student }) => {
   return (
     <li className="student-card">
-      <h2>{student.firstname}</h2>
-      <Link to={`students/${student.id}`} className="details-btn">{student.firstname} details</Link>
+      <p>{student.firstName}</p>
+      <Link to={`students/${student.id}`} className="details-btn">{student.firstName} details</Link>
     </li>
   )
 };
@@ -15,20 +15,18 @@ const StudentCard = ({ student }) => {
 
 export default function Students() {
   const { data: students, isLoading } = useGetStudentsQuery();
-  console.log(students);
+
   //additional features: add filter
   return (
     <div className="students">
       <section className="roster">
       <h1>Students</h1>
       {isLoading && <p>Loading student roster...</p>}
-      {students && (
         <ul>
-          {students.map((student) => (
-            <StudentCard key={student.id} task={student} />
+          {students?.map((student) => (
+            <StudentCard student={student} key={student.id} />
           ))}
         </ul>
-      )}
       </section>
       <aside className="add-form">
         <h2>New Student Form</h2>
