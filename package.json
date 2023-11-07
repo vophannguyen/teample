@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "main": "index/server.js",
   "scripts": {
-    "dev": "nodemon index/server.js",
+    "dev": "nodemon src/server/index.js",
     "build": "vite build",
     "start": "node index/server.js"
   },

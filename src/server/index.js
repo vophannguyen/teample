@@ -23,7 +23,7 @@ const createApp = async () => {
 
   // API routes
   app.use("/api/students", require("./api/students/students"));
-  app.use("/api/students/:id", require("./api/students/student"));
+  // app.use("/api/students/:id", require("./api/students/student"));
 
   // // Serve static HTML in production & Vite dev server in development
   // if (process.env.NODE_ENV === "production") {
