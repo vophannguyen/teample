@@ -4,7 +4,6 @@ import { validator } from "validator";
 
 /** Form for creating new tasks */
 export default function NewForm() {
-  const [description, setDescription] = useState("");
   const [createStudent] = useCreateStudentMutation();
 
   const onSubmit = async (e) => {
@@ -15,22 +14,28 @@ export default function NewForm() {
       firstname: formData.get("firstname"), 
       lastname: formData.get("lastname"),
       email: formData.get("email"),
-      imgURL: formData.get("imgURL") || "defaultimageurl",
+      imageURL: formData.get("imgURL") || "defaultimageurl",
       gpa: formData.get("gpa") 
   };
 
-    // if (formValue.trim() !== "") {
-    //   createStudent({ student: newStudent });
-    //   e.target.reset();
+    // if (newStudent.firstname.trim() == "") {
+
     // }
+    try {
+      await createStudent({ student: newStudent });
+      e.target.reset();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <form onSubmit={onSubmit}>
       <input name="firstname" placeholder="Firstname" />
+      {}
       <input name="lastname" placeholder="Lastname" />
       <input name="email" placeholder="Email" />
-      <input name="imgURL" placeholder="Image URL" />
+      <input name="imageURL" placeholder="Image URL" />
       <input name="gpa" placeholder="GPA" />
       <button className="add-btn" type="submit">Add Student</button>
     </form>
