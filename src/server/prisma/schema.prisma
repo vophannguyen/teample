@@ -16,5 +16,5 @@ model Student {
   lastname String
   email String @unique
   imageURL String
-  gpa Int
+  gpa Float
 }
