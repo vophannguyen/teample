@@ -1,9 +1,6 @@
-import { useSelector } from "react-redux";
-import { selectToken } from "../auth/authSlice";
-import NewStudent from "./NewStudent";
 import { Link } from "react-router-dom";
 import { useGetStudentsQuery } from "./studentSlice";
-
+import NewStudentForm from "./NewStudentForm"
 import "./Students.less";
 
 const StudentCard = ({ student }) => {
@@ -14,11 +11,11 @@ const StudentCard = ({ student }) => {
     </li>
   )
 };
-/** Main interface for user to interact with their tasks */
+
+
 export default function Students() {
   const { data: students, isLoading } = useGetStudentsQuery();
   console.log(students);
-
   //additional features: add filter
   return (
     <div className="students">
@@ -35,7 +32,7 @@ export default function Students() {
       </section>
       <aside className="add-form">
         <h2>Add New Student</h2>
-        <NewStudent />
+        <NewStudentForm />
         <h2>Students</h2>
       </aside>
     </div>
