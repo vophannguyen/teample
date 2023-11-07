@@ -13,7 +13,7 @@ const PORT = process.env.PORT ?? 8080;
  */
 const createApp = async () => {
   const app = express();
-  app.use(cors);
+  app.use(cors());
   // Logging middleware
   app.use(morgan("dev"));
 
