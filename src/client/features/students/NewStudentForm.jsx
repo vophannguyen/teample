@@ -1,17 +1,20 @@
+import React from "react";
+import { useState } from "react";
 
 /** Form for creating new tasks */
 export default function NewStudentForm() {
   // const [createStudent] = useCreateStudentMutation();
+  const [message, setMessage] = useState(null);
 
   const onSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target); 
     //do not execute a dispatch if field is empty
     const newStudent = { 
-      firstName: formData.get("firstname"), 
-      lastName: formData.get("lastname"),
+      firstName: formData.get("firstName"), 
+      lastName: formData.get("lastName"),
       email: formData.get("email"),
-      imageURL: formData.get("imgURL") || "defaultimageurl",
+      imageUrl: formData.get("imgUrl") || "defaultimageurl",
       gpa: formData.get("gpa") 
   };
     console.log(newStudent)
@@ -29,12 +32,12 @@ export default function NewStudentForm() {
 
   return (
     <form onSubmit={onSubmit}>
-      <input name="firstname" placeholder="Firstname" />
-      <input name="lastname" placeholder="Lastname" />
+      <input name="firstName" placeholder="Firstname" />
+      <input name="lastName" placeholder="Lastname" />
       <input name="email" placeholder="Email" />
-      <input name="imageURL" placeholder="Image URL" />
+      <input name="imageUrl" placeholder="Image URL" />
       <input name="gpa" placeholder="GPA" />
-      <button className="add-btn" type="submit">Add Student</button>
+      <button className="add-btn" type="submit">Add to roster</button>
     </form>
   );
 }

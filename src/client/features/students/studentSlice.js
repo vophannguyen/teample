@@ -4,6 +4,7 @@ const studentsApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getStudents: builder.query({
       query: () => "/students",
+      transformresponse: () => response.students,
       providesTags: ["Students"],
     }),
   }),

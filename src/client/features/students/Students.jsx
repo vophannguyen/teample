@@ -31,9 +31,8 @@ export default function Students() {
       )}
       </section>
       <aside className="add-form">
-        <h2>Add New Student</h2>
+        <h2>New Student Form</h2>
         <NewStudentForm />
-        <h2>Students</h2>
       </aside>
     </div>
   );
