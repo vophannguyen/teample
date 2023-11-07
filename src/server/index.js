@@ -4,7 +4,7 @@ const express = require("express");
 const morgan = require("morgan");
 const { createServer: createViteServer } = require("vite");
 
-const PORT = process.env.PORT ?? 3000;
+const PORT = process.env.PORT ?? 8080;
 
 /**
  * The app has to be created in a separate async function
@@ -21,19 +21,19 @@ const createApp = async () => {
   app.use(express.urlencoded({ extended: true }));
 
   // API routes
-  app.use("/api", require("./api"));
+  app.use("/api/students", require("./api/students/students"));
 
-  // Serve static HTML in production & Vite dev server in development
-  if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.resolve(__dirname, "../../dist/")));
-  } else {
-    // Pulled from https://vitejs.dev/config/server-options.html#server-middlewaremode
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-    });
+  // // Serve static HTML in production & Vite dev server in development
+  // if (process.env.NODE_ENV === "production") {
+  //   app.use(express.static(path.resolve(__dirname, "../../dist/")));
+  // } else {
+  //   // Pulled from https://vitejs.dev/config/server-options.html#server-middlewaremode
+  //   const vite = await createViteServer({
+  //     server: { middlewareMode: true },
+  //   });
 
-    app.use(vite.middlewares);
-  }
+  //   app.use(vite.middlewares);
+  // }
 
   // Simple error handling middleware
   app.use((err, req, res, next) => {
