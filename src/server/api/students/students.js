@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const prisma = require("../../prisma");
-const { emit } = require("nodemon");
+// const { emit } = require("nodemon");
 module.exports = router;
 
 //get all student
@@ -22,44 +22,79 @@ router.get("/", async (req, res, next) => {
 
 ////create new student
 router.post("/create", async (req, res, next) => {
-  try {
-    if (!req.body.imageUrl) {
-      imageUrl =
-        "https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg";
-    } else {
-      imageUrl = req.body.imageUrl;
-    }
-    const isEmail = await prisma.student.findUnique({
-      where: {
-        email: req.body.email,
-      },
-    });
-    if (isEmail) {
-      res.json({ message: "Email Already used" });
-    }
-    // if (!req.body.email) {
-    //   res.json({ error: "email invalid", message: "some@gmail.com" });
-    // }
-    if (!req.body.firstName || !req.body.lastName || !req.body.email) {
-      res.json({
-        error: "Some information is null",
-        message: "all information need not null",
-      });
-    }
+  // try {
+  //   if (!req.body.imageUrl) {
+  //     imageUrl =
+  //       "https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg";
+  //   } else {
+  //     imageUrl = req.body.imageUrl;
+  //   }
+  //   const isEmail = await prisma.student.findUnique({
+  //     where: {
+  //       email: req.body.email,
+  //     },
+  //   });
+  //   if (isEmail) {
+  //     res.json({ message: "Email Already used" });
+  //   }
+  //   if (!req.body.email) {
+  //     res.json({ error: "email invalid", message: "some@gmail.com" });
+  //   }
+  //   if (!req.body.firstName || !req.body.lastName || !req.body.email) {
+  //     res.json({
+  //       error: "Some information is null",
+  //       message: "all information need not null",
+  //     });
+  //   }
 
-    const data = await prisma.student.create({
+  //   const data = await prisma.student.create({
+  //     data: {
+  //       firstName: req.body.firstName,
+  //       lastName: req.body.lastName,
+  //       email: req.body.email,
+  //       imageUrl,
+  //     },
+  //   });
+  //   if (data) {
+  //     res.json({ message: "Successful", data: data });
+  //   }
+  // } catch (err) {
+  //   next(err);
+  // }
+
+  try {
+
+    //identify req.body
+    const { id, firstName, lastName, email, imageUrl, gpa} = req.body;
+
+    //error handling for repeat student info
+    // const emailExists = 
+
+    //error handling for no inputs
+    if(!id || !firstName || !lastName || !email || !gpa){
+      const error = {
+        status: 400, 
+        message: `Student must have an id, full name, email, and gpa.`,
+      };
+      next(error);
+    };
+
+    //create default image if one not included
+
+    //create new student
+    const student = await prisma.student.create({
       data: {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
+        id,
+        firstName, 
+        lastName,
+        email,
         imageUrl,
-      },
+        gpa
+      }
     });
-    if (data) {
-      res.json({ message: "Successful", data: data });
-    }
+    res.json(student.data);
   } catch (err) {
-    next(err);
+    next(err)
   }
 });
 
