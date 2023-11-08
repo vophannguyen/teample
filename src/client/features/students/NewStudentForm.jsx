@@ -25,7 +25,7 @@ export default function NewStudentForm() {
       lastName: formData.get("lastName"),
       email: formData.get("email"),
       imageUrl: formData.get("imageUrl") || "https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg",
-      gpa: formData.get("gpa") || 0.00,
+      gpa: formData.get("gpa"),
     };
     
     //do not dispatch if email is invalid
@@ -35,8 +35,8 @@ export default function NewStudentForm() {
         } else {
           const response = await createStudent({ newStudent }).unwrap();
           console.log(response);
-          // e.target.reset();
-          // navigate("/");
+          e.target.reset();
+          navigate("/");
         }
       } catch (err) {
         console.log(err);
@@ -51,7 +51,7 @@ export default function NewStudentForm() {
       <input name="email" type="text" placeholder="Email" onChange={validateEmail} required />
       <input name="imageUrl" type="text" placeholder="Image URL" />
       <input name="gpa" type="number" inputMode="decimal" min={0.00} max={4.00} step="0.01" placeholder="GPA" />
-      <button className="add-btn" type="submit">Add to roster</button>
+      <button className="add-btn" type="submit">Add Student</button>
       { message && <p>{message}</p> }
     </form>
   );
