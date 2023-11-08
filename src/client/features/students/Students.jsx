@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
-import { useGetStudentsQuery } from "./studentSlice";
+import { Link, useNavigate } from "react-router-dom";
+import { useGetStudentsQuery, useDeleteStudentMutation } from "./studentSlice";
 import NewStudentForm from "./NewStudentForm";
 import "./Students.less";
 
 const StudentCard = ({ student, onDelete }) => {
   return (
     <li className="student-card">
-      <Link to={`students/${student.id}`} className="details-btn">{student.firstName} {student.lastname}</Link>
+      <Link to={`/students/${student.id}`} className="details-btn">{student.firstName} {student.lastname}</Link>
       <button className="delete-btn" onClick={() => onDelete(student.id)}>x</button>
 
     </li>
@@ -14,13 +14,17 @@ const StudentCard = ({ student, onDelete }) => {
 };
 
 export default function Students() {
-  const { data: students, isLoading, isError } = useGetStudentsQuery();
-  console.log("students", students);
-  console.log("loading", isLoading);
-  console.log("error", isError);
+  const { data: students, isLoading } = useGetStudentsQuery();
+  const [ useDelete ] = useDeleteStudentMutation();
+  const navigate = useNavigate();
 
-  const onDelete = (id) => {
-    console.log("Delete", id);
+  const onDelete = async (id) => {
+    try {
+      await useDelete(id).unwrap();
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+    } 
   };
   //additional features: add filter
   return (
