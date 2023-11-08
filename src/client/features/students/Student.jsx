@@ -1,5 +1,3 @@
-//just testing
-
 import { useState } from "react";
 import { useDeleteTaskMutation, useEditTaskMutation } from "./studentSlice";
 
@@ -29,20 +27,17 @@ export default function Student({ task }) {
   };
 
   return (
-    <li>
-      <form onSubmit={save}>
-        <input type="checkbox" checked={task.done} onChange={toggleTask} />
-        <input
-          type="text"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
-        <button>Save</button>
-        <button onClick={onDelete} aria-label="delete">
-          🞪
-        </button>
-      </form>
-    </li>
-  );
+    <>
+      <div>`Student ${studentFirstName} ${studentLastName}`</div>
+      <br />
+      <div>`Contact Email ${studentEmail}`</div>
+      <br />
+      <image />
+      <br />
+      <div>`GPA ${studentGPA}`</div>
+      {/* Display name of their campus (or helpful message if they don't have one) 
+      if campus */}
+      {/* <div>{studentCampus ? studentCampus : `Campus not listed`}</div> */}
+    </>
+  )
 }
