@@ -6,9 +6,12 @@ import "./Students.less";
 const StudentCard = ({ student, onDelete }) => {
   return (
     <li className="student-card">
-      <Link to={`students/${student.id}`} className="details-btn">{student.firstName} {student.lastname}</Link>
-      <button className="delete-btn" onClick={() => onDelete(student.id)}>x</button>
-
+      <Link to={`students/${student.id}`} className="details-btn">
+        {student.firstName} {student.lastname}
+      </Link>
+      <button className="delete-btn" onClick={() => onDelete(student.id)}>
+        ✖
+      </button>
     </li>
   );
 };
@@ -30,7 +33,11 @@ export default function Students() {
         {isLoading && <p>Loading student roster...</p>}
         <ul>
           {students?.map((student) => (
-            <StudentCard student={student} key={student.id} onDelete={onDelete} />
+            <StudentCard
+              student={student}
+              key={student.id}
+              onDelete={onDelete}
+            />
           ))}
         </ul>
       </section>

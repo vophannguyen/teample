@@ -1,6 +1,5 @@
-
 //just testing
-import { useGetStudentQuery } from "./studentSlice"
+import { useGetStudentQuery } from "./studentSlice";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 // import { useDeleteTaskMutation, useEditTaskMutation } from "./studentSlice";
@@ -18,13 +17,13 @@ export default function Student({ student }) {
   /** Updates the task's `done` status */
   // const toggleTask = async (evt) => {
   //   const done = evt.target.checked;
-    // editTask({ ...task, done });
+  // editTask({ ...task, done });
   // };
 
   /** Saves the task's description */
   // const save = async (evt) => {
   //   evt.preventDefault();
-    // editTask({ ...task, description });
+  // editTask({ ...task, description });
   // };
 
   /** Deletes the task */
@@ -32,8 +31,7 @@ export default function Student({ student }) {
   //   evt.preventDefault();
   //   deleteTask(task.id);
   // };
-
-
+}
 // Display to user single student full, name, email, image, and gpa
 function studentDetails({ student }) {
   // Display the appropriate student when the url matches "/students/:studentId"
@@ -56,9 +54,7 @@ function studentDetails({ student }) {
     //     </button>
     //   </form>
     // </li>
-
   );
 }
-export default studentDetails;
 
 // Clicking on a student from the students view should navigate to show that selected student

@@ -1,0 +1,21 @@
+.create-form input {
+  margin-bottom: 1rem;
+  border-radius: 0.3rem;
+  border: none;
+  padding: 0.5rem;
+}
+.create-form input:focus {
+  outline: 2px solid green;
+}
+.create-form {
+  margin-top: 1rem;
+}
+.create-form button {
+  padding: 0.5rem;
+  background-color: lightgray;
+  border: none;
+  border-radius: 0.5rem;
+}
+.create-form button:hover {
+  background-color: darkgray;
+}
