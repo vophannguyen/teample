@@ -1,5 +1,5 @@
 //just testing
-import { useStudentQuery } from "./studentSlice"
+import { useGetStudentQuery } from "./studentSlice"
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 // import { useDeleteTaskMutation, useEditTaskMutation } from "./studentSlice";
