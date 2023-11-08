@@ -1,3 +1,4 @@
+
 //just testing
 import { useGetStudentQuery } from "./studentSlice"
 import { useParams, useNavigate } from "react-router-dom";
@@ -32,6 +33,10 @@ export default function Student({ student }) {
   //   deleteTask(task.id);
   // };
 
+
+// Display to user single student full, name, email, image, and gpa
+function studentDetails({ student }) {
+  // Display the appropriate student when the url matches "/students/:studentId"
   return (
     <article>
       <h2>Single Student View</h2>
@@ -51,5 +56,9 @@ export default function Student({ student }) {
     //     </button>
     //   </form>
     // </li>
+
   );
 }
+export default studentDetails;
+
+// Clicking on a student from the students view should navigate to show that selected student

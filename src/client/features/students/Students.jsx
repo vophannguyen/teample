@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useGetStudentsQuery } from "./studentSlice";
-import NewStudentForm from "./NewStudentForm"
+import NewStudentForm from "./NewStudentForm";
 import "./Students.less";
 
 const StudentCard = ({ student, onDelete }) => {
@@ -8,10 +8,10 @@ const StudentCard = ({ student, onDelete }) => {
     <li className="student-card">
       <Link to={`students/${student.id}`} className="details-btn">{student.firstName} {student.lastname}</Link>
       <button className="delete-btn" onClick={() => onDelete(student.id)}>x</button>
-    </li>
-  )
-};
 
+    </li>
+  );
+};
 
 export default function Students() {
   const { data: students, isLoading, isError } = useGetStudentsQuery();
@@ -26,8 +26,8 @@ export default function Students() {
   return (
     <div className="students">
       <section className="roster">
-      <h1>Students</h1>
-      {isLoading && <p>Loading student roster...</p>}
+        <h1>Students</h1>
+        {isLoading && <p>Loading student roster...</p>}
         <ul>
           {students?.map((student) => (
             <StudentCard student={student} key={student.id} onDelete={onDelete} />

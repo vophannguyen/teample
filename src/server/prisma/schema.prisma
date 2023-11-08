@@ -9,8 +9,8 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
-model student{
- id Int @id @default(autoincrement())
+model student {
+ id Int @id @unique @default(autoincrement())
  firstName String
  lastName String
  email  String @unique

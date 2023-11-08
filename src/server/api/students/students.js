@@ -14,11 +14,12 @@ router.get("/", async (req, res, next) => {
         data: studentData,
       });
     }
-    res.status(402).json({ error: "Some wrong" });
+    res.status(402).json({ error: "Something went wrong" });
   } catch (err) {
     console.error(err);
   }
 });
+
 ////create new student
 router.post("/create", async (req, res, next) => {
   try {
@@ -28,9 +29,17 @@ router.post("/create", async (req, res, next) => {
     } else {
       imageUrl = req.body.imageUrl;
     }
-    if (!req.body.email) {
-      res.json({ error: "email invalid", message: "some@gmail.com" });
+    const isEmail = await prisma.student.findUnique({
+      where: {
+        email: req.body.email,
+      },
+    });
+    if (isEmail) {
+      res.json({ message: "Email Already used" });
     }
+    // if (!req.body.email) {
+    //   res.json({ error: "email invalid", message: "some@gmail.com" });
+    // }
     if (!req.body.firstName || !req.body.lastName || !req.body.email) {
       res.json({
         error: "Some information is null",
@@ -47,13 +56,14 @@ router.post("/create", async (req, res, next) => {
       },
     });
     if (data) {
-      res.json({ message: "Succesful", data: data });
+      res.json({ message: "Successful", data: data });
     }
   } catch (err) {
     next(err);
   }
 });
-/// change information with singe student
+
+/// change information with single student
 router.put("/update/:id", async (req, res, next) => {
   try {
     const id = +req.params.id;
@@ -82,6 +92,7 @@ router.put("/update/:id", async (req, res, next) => {
     next(err);
   }
 });
+
 ///get single student with id
 router.get("/:id", async (req, res, next) => {
   try {
@@ -95,8 +106,30 @@ router.get("/:id", async (req, res, next) => {
       });
     }
 
-    res.json({ data: student });
+    res.json({ student });
   } catch (err) {
     next(err);
   }
 });
+
+
+//delete a student based on id
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const id = +req.params.id;
+    const student = await prisma.student.findUnique({ where: { id } });
+
+    if (!student) {
+      return next({
+        status: 404,
+        message: `Could not find student with id: ${id}.`,
+      });
+    }
+
+    await prisma.student.delete({where: { id: id }});
+
+    res.sendStatus(204);
+  } catch (err) {
+    next (err)
+  }
+})
