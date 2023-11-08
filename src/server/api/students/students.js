@@ -11,7 +11,7 @@ router.get("/", async (req, res, next) => {
     if (studentData) {
       res.json({
         message: "successful",
-        data: studentData,
+        students: studentData,
       });
     }
     res.status(402).json({ error: "Something went wrong" });
@@ -56,7 +56,7 @@ router.post("/create", async (req, res, next) => {
       },
     });
     if (data) {
-      res.json({ message: "Successful", data: data });
+      res.json({ message: "Successful", student: data });
     }
   } catch (err) {
     next(err);
@@ -86,7 +86,7 @@ router.put("/update/:id", async (req, res, next) => {
       },
     });
     if (data) {
-      res.json({ message: "successful", data: data });
+      res.json({ message: "successful", student: data });
     }
   } catch (err) {
     next(err);
@@ -100,7 +100,7 @@ router.get("/:id", async (req, res, next) => {
     const student = await prisma.student.findUnique({ where: { id } });
 
     if (!student) {
-      return next({
+      res.json({
         status: 404,
         message: `Could not find student with id: ${id}.`,
       });
@@ -112,7 +112,6 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-
 //delete a student based on id
 router.delete("/:id", async (req, res, next) => {
   try {
@@ -120,16 +119,18 @@ router.delete("/:id", async (req, res, next) => {
     const student = await prisma.student.findUnique({ where: { id } });
 
     if (!student) {
-      return next({
+      res.json({
         status: 404,
         message: `Could not find student with id: ${id}.`,
       });
     }
 
-    await prisma.student.delete({where: { id: id }});
+    const data = await prisma.student.delete({ where: { id: id } });
 
-    res.sendStatus(204);
+    if (data) {
+      res.json({ message: "Success", student: data });
+    }
   } catch (err) {
-    next (err)
+    next(err);
   }
-})
+});

@@ -34,7 +34,11 @@ export default function Students() {
         {isLoading && <p>Loading student roster...</p>}
         <ul>
           {students?.map((student) => (
-            <StudentCard student={student} key={student.id} onDelete={onDelete} />
+            <StudentCard
+              student={student}
+              key={student.id}
+              onDelete={onDelete}
+            />
           ))}
         </ul>
       </section>
