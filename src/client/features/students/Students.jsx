@@ -1,15 +1,17 @@
 import { Link } from "react-router-dom";
 import { useGetStudentsQuery } from "./studentSlice";
-import NewStudentForm from "./NewStudentForm"
+import NewStudentForm from "./NewStudentForm";
 import "./Students.less";
 
 const StudentCard = ({ student }) => {
   return (
     <li className="student-card">
       <p>{student.firstName}</p>
-      <Link to={`students/${student.id}`} className="details-btn">{student.firstName} details</Link>
+      <Link to={`students/${student.id}`} className="details-btn">
+        {student.firstName} details
+      </Link>
     </li>
-  )
+  );
 };
 
 export default function Students() {
@@ -21,8 +23,8 @@ export default function Students() {
   return (
     <div className="students">
       <section className="roster">
-      <h1>Students</h1>
-      {isLoading && <p>Loading student roster...</p>}
+        <h1>Students</h1>
+        {isLoading && <p>Loading student roster...</p>}
         <ul>
           {students?.map((student) => (
             <StudentCard student={student} key={student.id} />

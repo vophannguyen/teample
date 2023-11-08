@@ -4,6 +4,7 @@ import "./index.less";
 import { Provider } from "react-redux";
 import store from "./store";
 import Students from "./features/students/Students";
+import Student from "./features/students/Student";
 import Root from "./layout/Root.jsx";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Students /> },
       { path: "/tasks", element: <Students /> },
+      { path: "/students/:id", element: <Student /> },
     ],
   },
 ]);
