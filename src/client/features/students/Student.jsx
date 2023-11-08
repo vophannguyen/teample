@@ -1,10 +1,11 @@
+//This file is just for viewing a single selected Student, with all their details
 import { useState } from "react";
 import { useDeleteTaskMutation, useEditTaskMutation } from "./studentSlice"
 // import seed from "../seed.js"
 
 
 // Display to user single student full, name, email, image, and gpa 
-function studentDetails({ Student }) {
+function studentDetails({ student }) {
   // Display the appropriate student when the url matches "/students/:studentId"
   return (
     <>
@@ -17,6 +18,7 @@ function studentDetails({ Student }) {
       <div>`GPA ${studentGPA}`</div>
       {/* Display name of their campus (or helpful message if they don't have one) 
       if campus */}
+      <div>{studentCampus ? studentCampus : `Campus not listed`}</div>
     </>
   )
 }
