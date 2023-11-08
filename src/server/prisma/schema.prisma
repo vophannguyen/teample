@@ -9,7 +9,7 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
-model student{
+model student {
  id Int @id @unique @default(autoincrement())
  firstName String
  lastName String
