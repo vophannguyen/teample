@@ -2,11 +2,11 @@
   "name": "fullstack_template",
   "private": true,
   "version": "0.0.0",
-  "main": "src/server/index.js",
+  "main": "index/server.js",
   "scripts": {
     "dev": "nodemon src/server/index.js",
     "build": "vite build",
-    "start": "node src/server"
+    "start": "node index/server.js"
   },
   "prisma": {
     "schema": "src/server/prisma/schema.prisma",
@@ -22,6 +22,7 @@
     "jsonwebtoken": "^9.0.2",
     "less": "^4.2.0",
     "morgan": "^1.10.0",
+    "node": "^21.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.3",

@@ -17,3 +17,20 @@ router.get("/", async (req, res, next) => {
     console.error(err);
   }
 });
+router.get("/:id", async (req, res, next) => {
+  try {
+    const id = +req.params.id;
+    const student = await prisma.student.findUnique({ where: { id } });
+
+    if (!student) {
+      return next({
+        status: 404,
+        message: `Could not find student with id: ${id}.`,
+      });
+    }
+
+    res.json({ data: student });
+  } catch (err) {
+    next(err);
+  }
+});

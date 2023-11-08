@@ -13,7 +13,7 @@ const PORT = process.env.PORT ?? 8080;
  */
 const createApp = async () => {
   const app = express();
-  app.use(cors);
+  app.use(cors());
   // Logging middleware
   app.use(morgan("dev"));
 
@@ -23,6 +23,7 @@ const createApp = async () => {
 
   // API routes
   app.use("/api/students", require("./api/students/students"));
+  // app.use("/api/students/:id", require("./api/students/student"));
 
   // // Serve static HTML in production & Vite dev server in development
   // if (process.env.NODE_ENV === "production") {
@@ -43,7 +44,7 @@ const createApp = async () => {
   });
 
   app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}.`);
+    console.log(`Server listening on http://localhost:${PORT}.`);
   });
 };
 
