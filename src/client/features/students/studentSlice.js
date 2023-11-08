@@ -13,13 +13,13 @@ const studentsApi = api.injectEndpoints({
       providesTags: ["Students"],
     }),
     createStudent: builder.mutation({
-      query: (student) => ({
+      query: (data) => ({
         url: "/students/create",
         method: 'POST',
-        body: student,
+        body: data,
       }),
       invalidatesTags: ["Students"],
-    })
+    }),
   }),
 });
 
