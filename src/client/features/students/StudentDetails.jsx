@@ -7,11 +7,12 @@ import { useState } from "react";
 /** Allows user to read, update, and delete a task */
 export default function StudentDetails() {
   const [ deleteStudent ] = useDeleteStudentMutation();
+  const [ message, setMessage ] = useState(null);
   const [ isValid, setIsValid ] = useState(false);
   const [ edit, setEdit ] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
-  const [ updateStudent ] = useUpdateStudentMutation(id);
+  const [ updateStudent ] = useUpdateStudentMutation();
   const { data } = useGetStudentQuery(id);
   
   
@@ -40,8 +41,9 @@ export default function StudentDetails() {
       } else {
         await updateStudent( id, editStudent ).unwrap();
         e.target.reset();
-        navigate(`/students/${id}`);
         setEdit(false);
+        console.log(editStudent);
+        navigate(`/students/${id}`);
       }
     } catch (err) {
       console.log(err);
@@ -90,11 +92,10 @@ export default function StudentDetails() {
     <button className="add-btn" type="submit">
       Save
     </button>
-    {/* {message && <p>{message}</p>} */}
+    {message && <p>{message}</p>}
   </form>
   );
   
-  console.log(data);
   return (
     <>
     { data ? (
