@@ -100,7 +100,7 @@ router.get("/:id", async (req, res, next) => {
     const student = await prisma.student.findUnique({ where: { id } });
 
     if (!student) {
-      return next({
+      res.json({
         status: 404,
         message: `Could not find student with id: ${id}.`,
       });
@@ -112,7 +112,6 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-
 //delete a student based on id
 router.delete("/:id", async (req, res, next) => {
   try {
@@ -120,16 +119,16 @@ router.delete("/:id", async (req, res, next) => {
     const student = await prisma.student.findUnique({ where: { id } });
 
     if (!student) {
-      return next({
+      res.json({
         status: 404,
         message: `Could not find student with id: ${id}.`,
       });
     }
 
-    await prisma.student.delete({where: { id: id }});
+    await prisma.student.delete({ where: { id: id } });
 
     res.sendStatus(204);
   } catch (err) {
-    next (err)
+    next(err);
   }
-})
+});
