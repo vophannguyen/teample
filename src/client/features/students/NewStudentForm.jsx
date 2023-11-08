@@ -34,7 +34,6 @@ export default function NewStudentForm() {
           setMessage("Required: valid email address")
         } else {
           const response = await createStudent( newStudent ).unwrap();
-          console.log(response);
           e.target.reset();
           navigate("/");
         }
