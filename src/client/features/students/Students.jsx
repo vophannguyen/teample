@@ -8,7 +8,6 @@ const StudentCard = ({ student, onDelete }) => {
     <li className="student-card">
       <Link to={`/students/${student.id}`} className="details-btn">{student.firstName} {student.lastname}</Link>
       <button className="delete-btn" onClick={() => onDelete(student.id)}>x</button>
-
     </li>
   );
 };
@@ -17,6 +16,7 @@ export default function Students() {
   const { data: students, isLoading } = useGetStudentsQuery();
   const [ useDelete ] = useDeleteStudentMutation();
   const navigate = useNavigate();
+  console.log(students)
 
   const onDelete = async (id) => {
     try {
