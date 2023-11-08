@@ -12,7 +12,6 @@ const StudentCard = ({ student }) => {
   )
 };
 
-
 export default function Students() {
   const { data: students, isLoading, isError } = useGetStudentsQuery();
   console.log("students", students);
