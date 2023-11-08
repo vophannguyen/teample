@@ -7,9 +7,24 @@ const studentsApi = api.injectEndpoints({
       transformResponse: (response) => response.data,
       providesTags: ["Students"],
     }),
+    getStudent: builder.query({
+      query: (id) => "/students/${id}",
+      transformResponse: (response) => response.data,
+      providesTags: ["Students"],
+    }),
+    createStudent: builder.mutation({
+      query: (data) => ({
+        url: "/students/create",
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ["Students"],
+    }),
   }),
 });
 
 export const {
   useGetStudentsQuery,
+  useGetStudentQuery,
+  useCreateStudentMutation
 } = studentsApi;

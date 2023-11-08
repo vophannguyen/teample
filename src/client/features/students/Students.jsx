@@ -3,13 +3,12 @@ import { useGetStudentsQuery } from "./studentSlice";
 import NewStudentForm from "./NewStudentForm";
 import "./Students.less";
 
-const StudentCard = ({ student }) => {
+const StudentCard = ({ student, onDelete }) => {
   return (
     <li className="student-card">
-      <p>{student.firstName}</p>
-      <Link to={`students/${student.id}`} className="details-btn">
-        {student.firstName} details
-      </Link>
+      <Link to={`students/${student.id}`} className="details-btn">{student.firstName} {student.lastname}</Link>
+      <button className="delete-btn" onClick={() => onDelete(student.id)}>x</button>
+
     </li>
   );
 };
@@ -19,6 +18,10 @@ export default function Students() {
   console.log("students", students);
   console.log("loading", isLoading);
   console.log("error", isError);
+
+  const onDelete = (id) => {
+    console.log("Delete", id);
+  };
   //additional features: add filter
   return (
     <div className="students">
@@ -27,7 +30,7 @@ export default function Students() {
         {isLoading && <p>Loading student roster...</p>}
         <ul>
           {students?.map((student) => (
-            <StudentCard student={student} key={student.id} />
+            <StudentCard student={student} key={student.id} onDelete={onDelete} />
           ))}
         </ul>
       </section>
