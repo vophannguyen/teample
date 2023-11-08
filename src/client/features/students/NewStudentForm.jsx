@@ -25,7 +25,7 @@ export default function NewStudentForm() {
       lastName: formData.get("lastName"),
       email: formData.get("email"),
       imageUrl: formData.get("imageUrl") || "https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg",
-      gpa: formData.get("gpa"),
+      gpa: formData.get("gpa") || 0.00,
     };
     
     //do not dispatch if email is invalid
