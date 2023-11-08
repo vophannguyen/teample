@@ -1,41 +1,47 @@
 
 //just testing
-import { useGetStudentQuery } from "./studentSlice"
+import { useGetStudentQuery, useDeleteStudentMutation, useUpdateStudentMutation } from "./studentSlice"
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
-// import { useDeleteTaskMutation, useEditTaskMutation } from "./studentSlice";
 
 /** Allows user to read, update, and delete a task */
-export default function StudentDetails({ student }) {
+export default function StudentDetails() {
+  const [ useDelete ] = useDeleteStudentMutation();
+  const [ useUpdate ] = useUpdateStudentMutation();
   const navigate = useNavigate();
   const { id } = useParams();
   const { data } = useGetStudentQuery(id);
-  const [editTask] = useEditTaskMutation();
-  const [deleteTask] = useDeleteTaskMutation();
-
-  const [description, setDescription] = useState(task.description);
-
-  /** Updates the task's `done` status */
-  const toggleTask = async (evt) => {
-    const done = evt.target.checked;
-    editTask({ ...task, done });
+ 
+  const onEdit = async (e) => {
+    e.preventDefault();
   };
 
-  /** Saves the task's description */
-  const save = async (evt) => {
-    evt.preventDefault();
-    editTask({ ...task, description });
+  const onDelete = async (id) => {
+    try {
+      await useDelete(id).unwrap();
+      navigate("/");
+    } catch(err) {
+      console.log(err);
+    }
   };
 
-  /** Deletes the task */
-  const onDelete = async (evt) => {
-    evt.preventDefault();
-    deleteTask(task.id);
+  const onNavigate = () => {
+    navigate("/");
   };
-  
-  return (
-    <article className="details-card">
-      <h2>Single Student View</h2>
-    </article>
-  )
+
+  return data ? (
+    <section className="student-details">
+      <article className="col-left">
+        <img src={data.imageUrl} alt={data.firstName} />
+        <h2>{data.firstName} {data.lastName}</h2>
+        <h3>GPA: {data.gpa}</h3>
+        <h3>Contact: {data.email}</h3>
+      </article>
+      <aside>
+        <button className="edit-btn" onClick={() => onEdit(data.id)}>Edit Profile</button>
+        <button className="delete-btn" onClick={() => onDelete(data.id)}>Delete</button>
+        <button className="return-btn" onClick={onNavigate}>Return</button>
+      </aside>
+    </section>
+  ) : (<p>Loading...</p>)
 }

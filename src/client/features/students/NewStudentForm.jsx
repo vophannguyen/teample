@@ -33,7 +33,7 @@ export default function NewStudentForm() {
         if (!isValid) {
           setMessage("Required: valid email address")
         } else {
-          const response = await createStudent( newStudent ).unwrap();
+          await createStudent( newStudent ).unwrap();
           e.target.reset();
           navigate("/");
         }
