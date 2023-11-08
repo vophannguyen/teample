@@ -44,10 +44,8 @@ export default function NewStudentForm() {
     }
   };
 
-  console.log(message)
-
   return (
-    <form classname="add-form" type="text" onSubmit={onSubmit}>
+    <form classname="create-form" type="text" onSubmit={onSubmit}>
       <input name="firstName" type="text" placeholder="Firstname" required />
       <input name="lastName" type="text" placeholder="Lastname" required />
       <input name="email" type="text" placeholder="Email" onChange={validateEmail} required />
