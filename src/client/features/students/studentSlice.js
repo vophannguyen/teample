@@ -7,9 +7,14 @@ const studentsApi = api.injectEndpoints({
       transformResponse: (response) => response.data,
       providesTags: ["Students"],
     }),
+    getSingleStudent: builder.query({
+      query: () => "/students/:studentId",
+      transformResponse: (response) => response.data,
+      providesTags: ["SingleStudent"],
+    })
   }),
 });
 
 export const {
-  useGetStudentsQuery,
+  useGetStudentsQuery, useGetSingleStudentQuery
 } = studentsApi;
