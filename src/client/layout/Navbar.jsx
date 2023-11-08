@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { logout, selectToken } from "../features/auth/authSlice";
-
 import "./Navbar.less";
 
 /**
@@ -9,24 +8,24 @@ import "./Navbar.less";
  * and "Log Out" if the user is logged in.
  */
 export default function Navbar() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
 
-  const token = useSelector(selectToken);
+  // const token = useSelector(selectToken);
 
-  const handleLogout = async () => {
-    await dispatch(logout());
-    navigate("/");
-  };
+  // const handleLogout = async () => {
+  //   await dispatch(logout());
+  //   navigate("/");
+  // };
 
   return (
     <nav className="top">
-      <h1>Task Tracker</h1>
+      <h1>Student Roster</h1>
       <menu>
         <li>
           <NavLink to="/">Home</NavLink>
         </li>
-        {token ? (
+        {/* {token ? (
           <li>
             <a onClick={handleLogout}>Log Out</a>
           </li>
@@ -34,7 +33,7 @@ export default function Navbar() {
           <li>
             <NavLink to="/login">Log In</NavLink>
           </li>
-        )}
+        )} */}
       </menu>
     </nav>
   );

@@ -1,43 +1,37 @@
-import { useSelector } from "react-redux";
-import { selectToken } from "../auth/authSlice";
-import NewStudent from "./NewStudent";
 import { Link } from "react-router-dom";
 import { useGetStudentsQuery } from "./studentSlice";
-// Need to pull in our seed.js data
-
+import NewStudentForm from "./NewStudentForm"
 import "./Students.less";
 
 const StudentCard = ({ student }) => {
   return (
     <li className="student-card">
-      <h2>{student.firstName}</h2>
+      <p>{student.firstName}</p>
       <Link to={`students/${student.id}`} className="details-btn">{student.firstName} details</Link>
     </li>
   )
 };
-/** Main interface for user to interact with their tasks */
-export default function Students() {
-  const { data: students, isLoading } = useGetStudentsQuery();
-  console.log(students);
 
+export default function Students() {
+  const { data: students, isLoading, isError } = useGetStudentsQuery();
+  console.log("students", students);
+  console.log("loading", isLoading);
+  console.log("error", isError);
   //additional features: add filter
   return (
     <div className="students">
       <section className="roster">
-        <h1>Students</h1>
-        {isLoading && <p>Loading student roster...</p>}
-        {students && (
-          <ul>
-            {students.map((student) => (
-              <StudentCard key={student.id} task={student} /> //Is this the like to single student detail card?
-            ))}
-          </ul>
-        )}
+      <h1>Students</h1>
+      {isLoading && <p>Loading student roster...</p>}
+        <ul>
+          {students?.map((student) => (
+            <StudentCard student={student} key={student.id} />
+          ))}
+        </ul>
       </section>
       <aside className="add-form">
-        <h2>Add New Student</h2>
-        <NewStudent />
-        <h2>Students</h2>
+        <h2>New Student Form</h2>
+        <NewStudentForm />
       </aside>
     </div>
   );
