@@ -8,7 +8,7 @@ const studentsApi = api.injectEndpoints({
       providesTags: ["Students"],
     }),
     getStudent: builder.query({
-      query: (id) => "/students/${id}",
+      query: (id) => `/students/${id}`,
       transformResponse: (response) => response.student,
       providesTags: ["Students"],
     }),
@@ -20,6 +20,36 @@ const studentsApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Students"],
     }),
+    deleteStudent: builder.mutation({
+      query: (id) => ({
+        url: `/students/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ["Students"],
+    }),
+    updateStudent: builder.mutation({
+      query: (id, data) => ({
+        url: `/students/${id}`,
+        method: 'PUT',
+        body: data,
+      }),
+      invalidatesTags: ["Students"],
+    }),
+    deleteStudent: builder.mutation({
+      query: (id) => ({
+        url: `/students/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ["Students"],
+    }),
+    updateStudent: builder.mutation({
+      query: (id, data) => ({
+        url: `/students/${id}`,
+        method: 'PUT',
+        body: data,
+      }),
+      invalidatesTags: ["Students"],
+    }),
   }),
 });
 
@@ -27,4 +57,6 @@ export const {
   useGetStudentsQuery,
   useGetStudentQuery,
   useCreateStudentMutation,
+  useDeleteStudentMutation,
+  useUpdateStudentMutation
 } = studentsApi;

@@ -30,19 +30,19 @@ export default function NewStudentForm() {
     };
 
     //do not dispatch if email is invalid
-    try {
-      if (!isValid) {
-        setMessage("Required: valid email address");
-      } else {
-        const response = await createStudent(newStudent).unwrap();
-        console.log(response);
-        e.target.reset();
-        navigate("/");
+      try {
+        if (!isValid) {
+          setMessage("Required: valid email address")
+        } else {
+          await createStudent( newStudent ).unwrap();
+          e.target.reset();
+          navigate("/");
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+
+    };
 
   return (
     <form className="create-form" type="text" onSubmit={onSubmit}>
