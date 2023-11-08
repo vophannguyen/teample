@@ -67,6 +67,10 @@ router.post("/create", async (req, res, next) => {
 router.put("/update/:id", async (req, res, next) => {
   try {
     const id = +req.params.id;
+    let dataIn = {};
+    // if (!req.body) {
+    //   res.json({ error: req.body.firstName });
+    // }
     const isId = await prisma.student.findUnique({
       where: {
         id: id,
@@ -75,15 +79,34 @@ router.put("/update/:id", async (req, res, next) => {
     if (!isId) {
       res.json({ message: "Student not Found" });
     }
+    imageUrl = req.body.imageUrl ? req.body.imageUrl : isId.imageUrl;
+    gpa = req.body.gpa ? +req.body.gpa : isId.gpa;
+    const isEmail = await prisma.student.findUnique({
+      where: {
+        email: req.body.email,
+      },
+    });
+    if (isEmail) {
+      dataIn = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        imageUrl,
+        gpa,
+      };
+    } else {
+      dataIn = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        imageUrl,
+        gpa,
+      };
+    }
     const data = await prisma.student.update({
       where: {
         id: id,
       },
-      data: {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-      },
+      data: dataIn,
     });
     if (data) {
       res.json({ message: "successful", student: data });
