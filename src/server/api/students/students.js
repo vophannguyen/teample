@@ -29,9 +29,17 @@ router.post("/create", async (req, res, next) => {
     } else {
       imageUrl = req.body.imageUrl;
     }
-    if (!req.body.email) {
-      res.json({ error: "email invalid", message: "some@gmail.com" });
+    const isEmail = await prisma.student.findUnique({
+      where: {
+        email: req.body.email,
+      },
+    });
+    if (isEmail) {
+      res.json({ message: "Email Already used" });
     }
+    // if (!req.body.email) {
+    //   res.json({ error: "email invalid", message: "some@gmail.com" });
+    // }
     if (!req.body.firstName || !req.body.lastName || !req.body.email) {
       res.json({
         error: "Some information is null",
