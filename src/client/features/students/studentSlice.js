@@ -28,12 +28,13 @@ const studentsApi = api.injectEndpoints({
       invalidatesTags: ["Students"],
     }),
     updateStudent: builder.mutation({
-      query: (id, data) => ({
+      query: ({ id, ...data }) => ({
         url: `/students/update/${id}`,
         method: 'PUT',
         body: data,
       }),
       invalidatesTags: ["Students"],
+      transformResponse: (response) => response,
     }),
   }),
 });
