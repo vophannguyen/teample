@@ -52,23 +52,21 @@ const prisma = require("../prisma");
 //     process.exit(1);
 //   });
 function gpa(min, max) {
-  return Math.floor(Math.random() * ( max - min) + min)
+  return Math.floor(Math.random() * (max - min) + min);
 }
 
-
-const seed = async (numStudents = 200) => {
-
+const seed = async (numStudents = 10) => {
   for (let i = 0; i < numStudents; i++) {
     await prisma.student.create({
-      data:{
+      data: {
         firstName: `firstName${i}`,
-        lastName: `lastName${i}`, 
+        lastName: `lastName${i}`,
         email: `${i}@gmail.com`,
         imageUrl: `https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg`,
         gpa: gpa(2.1, 4.9),
       },
     });
-  };
+  }
 };
 
 seed()
@@ -77,4 +75,4 @@ seed()
     console.error(e);
     await primsa.$disconnect();
     process.exit(1);
-  })
+  });
