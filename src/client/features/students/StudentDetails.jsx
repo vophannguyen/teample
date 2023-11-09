@@ -49,6 +49,9 @@ export default function StudentDetails() {
         e.target.reset();
         setEdit(false);
         navigate(`/students/${id}`);
+        if (response.Notice) {
+          alert("Email already exists in the database");
+        }
       }
     } catch (err) {
       console.log(err);
