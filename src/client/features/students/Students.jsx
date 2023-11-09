@@ -6,16 +6,17 @@ import "./Students.less";
 const StudentCard = ({ student, onDelete }) => {
   return (
     <li className="student-card">
-      <Link to={`/students/${student.id}`} className="details-btn">{student.firstName} {student.lastname}</Link>
+      <Link to={`/students/${student.id}`} className="details-btn">{student.firstName} {student.lastName}</Link>
       <button className="delete-btn" onClick={() => onDelete(student.id)}>x</button>
     </li>
   );
 };
 
 export default function Students() {
-  const { data: students, isLoading } = useGetStudentsQuery();
+  const { data: students, isLoading, useSort } = useGetStudentsQuery();
   const [ useDelete ] = useDeleteStudentMutation();
   const navigate = useNavigate();
+
   console.log(students)
 
   const onDelete = async (id) => {
@@ -26,12 +27,21 @@ export default function Students() {
       console.error(err);
     } 
   };
-  //additional features: add filter
+
+  const onSort = async (lastName) => {
+    try {
+      await useSort(lastName).map;
+    } catch (err) {
+      next (err)
+    }
+  }
+
   return (
     <div className="students">
       <section className="roster">
         <h1>Students</h1>
         {isLoading && <p>Loading student roster...</p>}
+        <button onClick={onSort}>Sort A-Z</button>
         <ul>
           {students?.map((student) => (
             <StudentCard
