@@ -1,13 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter");
 
 @bg: #ffffff;
-@text: #333;
-@link-color: #428bca; // sea blue
+@text: black;
+@link-color: black;
 @link-color-hover: darken(@link-color, 10%);
 
 :root {
   font-family: Inter, sans-serif;
-
   color: @text;
   background-color: @bg;
 }
@@ -16,6 +15,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  background-color: #54B6CA;
 }
 
 ul,
@@ -33,4 +33,13 @@ a {
     text-decoration: underline;
     color: @link-color-hover;
   }
+}
+
+body {
+  background-color: #4CAAAD;
+  border-color: #449F90;
+}
+
+.students section button {
+  background-color: #348756;
 }
