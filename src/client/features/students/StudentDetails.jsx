@@ -6,6 +6,7 @@ import {
 } from "./studentSlice";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import "./studentDetails.css";
 
 /** Allows user to read, update, and delete a task */
 export default function StudentDetails() {
@@ -49,6 +50,9 @@ export default function StudentDetails() {
         e.target.reset();
         setEdit(false);
         navigate(`/students/${id}`);
+        if (response.Notice) {
+          alert("Email already exists in the database");
+        }
       }
     } catch (err) {
       console.log(err);
@@ -75,6 +79,7 @@ export default function StudentDetails() {
 
   const editForm = (
     <form className="edit-form" type="text" onSubmit={onSubmit}>
+      <h3>Update Student</h3>
       <input name="firstName" type="text" placeholder="Firstname" required />
       <input name="lastName" type="text" placeholder="Lastname" required />
       <input
@@ -98,37 +103,41 @@ export default function StudentDetails() {
         Save
       </button>
       {message && <p>{message}</p>}
+      <div className="close" onClick={() => setEdit(() => false)}>
+        ✖
+      </div>
     </form>
   );
 
   return (
-    <>
+    <div className="student-container">
       {data ? (
         <section className="student-details">
           <article className="col-left">
             <img src={data.imageUrl} alt={data.firstName} />
-            <h2>
-              {data.firstName} {data.lastName}
-            </h2>
+            <h2>First Name: {data.firstName}</h2>
+            <h2>Last Name: {data.lastName}</h2>
             <h3>GPA: {data.gpa}</h3>
             <h3>Contact: {data.email}</h3>
           </article>
-          <aside>
-            <button className="edit-btn" onClick={onEdit}>
-              Edit
-            </button>
-            <button className="delete-btn" onClick={() => onDelete(data.id)}>
-              Delete
-            </button>
-            <button className="return-btn" onClick={onNavigate}>
-              Return
-            </button>
-          </aside>
+          {!edit && (
+            <aside>
+              <button className="edit-btn" onClick={onEdit}>
+                Edit
+              </button>
+              <button className="delete-btn" onClick={() => onDelete(data.id)}>
+                Delete
+              </button>
+              <button className="return-btn" onClick={onNavigate}>
+                Return
+              </button>
+            </aside>
+          )}
         </section>
       ) : (
         <p>Loading...</p>
       )}
       {edit && editForm}
-    </>
+    </div>
   );
 }

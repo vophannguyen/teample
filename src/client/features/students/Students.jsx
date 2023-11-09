@@ -6,17 +6,24 @@ import "./Students.less";
 const StudentCard = ({ student, onDelete }) => {
   return (
     <li className="student-card">
-      <Link to={`/students/${student.id}`} className="details-btn">{student.firstName} {student.lastname}</Link>
-      <button className="delete-btn" onClick={() => onDelete(student.id)}>x</button>
+      <div className="student-single">
+        <img src={student.imageUrl} alt="" />
+        <Link to={`/students/${student.id}`} className="details-btn">
+          {student.firstName} {student.lastName}
+        </Link>
+      </div>
+      <button className="delete-btn" onClick={() => onDelete(student.id)}>
+        x
+      </button>
     </li>
   );
 };
 
 export default function Students() {
   const { data: students, isLoading } = useGetStudentsQuery();
-  const [ useDelete ] = useDeleteStudentMutation();
+  const [useDelete] = useDeleteStudentMutation();
   const navigate = useNavigate();
-  console.log(students)
+  // console.log(students)
 
   const onDelete = async (id) => {
     try {
@@ -24,7 +31,7 @@ export default function Students() {
       navigate("/");
     } catch (err) {
       console.error(err);
-    } 
+    }
   };
   //additional features: add filter
   return (
