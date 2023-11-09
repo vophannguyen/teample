@@ -55,7 +55,7 @@ function gpa(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-const seed = async (numStudents = 10) => {
+const seed = async (numStudents = 110) => {
   for (let i = 0; i < numStudents; i++) {
     await prisma.student.create({
       data: {

@@ -66,26 +66,33 @@ router.post("/create", async (req, res, next) => {
 /// change information with single student
 router.put("/update/:id", async (req, res, next) => {
   try {
+    //get id
     const id = +req.params.id;
     let dataIn = {};
     // if (!req.body) {
     //   res.json({ error: req.body.firstName });
     // }
-    const isId = await prisma.student.findUnique({
+    //get student with id
+    const isStudent = await prisma.student.findUnique({
       where: {
         id: id,
       },
     });
-    if (!isId) {
+    //check if student not found send mess
+    if (!isStudent) {
       res.json({ message: "Student not Found" });
     }
-    imageUrl = req.body.imageUrl ? req.body.imageUrl : isId.imageUrl;
-    gpa = req.body.gpa ? +req.body.gpa : isId.gpa;
+    // set up some data to defaulf if they dont pass in
+    imageUrl = req.body.imageUrl ? req.body.imageUrl : isStudent.imageUrl;
+    gpa = req.body.gpa ? +req.body.gpa : isStudent.gpa;
+    // find student with email
     const isEmail = await prisma.student.findUnique({
       where: {
         email: req.body.email,
       },
     });
+    // check email exist ,dont get that email pass in to data
+    //because email is unique
     if (isEmail) {
       dataIn = {
         firstName: req.body.firstName,
@@ -102,14 +109,28 @@ router.put("/update/:id", async (req, res, next) => {
         gpa,
       };
     }
+    //update student
     const data = await prisma.student.update({
       where: {
         id: id,
       },
       data: dataIn,
     });
+    //data is true send
     if (data) {
-      res.json({ message: "successful", student: data });
+      //if isEmail is exist send Notice
+      res.json(
+        isEmail
+          ? {
+              message: "successful",
+              Notice: "you or another student already used this email",
+              student: data,
+            }
+          : {
+              message: "successful",
+              student: data,
+            }
+      );
     }
   } catch (err) {
     next(err);
