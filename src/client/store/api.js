@@ -8,11 +8,6 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:8080/api",
-
-    // prepareHeaders: (headers, { getState }) => {
-    //   headers.set("Content-Type", "multipart/form-data");
-    //   return headers;
-    // },
   }),
   endpoints: () => ({}),
 });

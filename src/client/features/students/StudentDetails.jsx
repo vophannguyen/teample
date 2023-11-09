@@ -44,7 +44,7 @@ export default function StudentDetails() {
         setMessage("Required: valid email address");
       } else {
         console.log(editStudent);
-        const response = await updateStudent({ id, ...editStudent });
+        const response = await updateStudent({ id, ...editStudent }).unwrap();
         console.log(response);
         e.target.reset();
         setEdit(false);

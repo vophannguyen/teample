@@ -10,7 +10,6 @@ import Root from "./layout/Root.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const router = createBrowserRouter([
   {
-    path: "/",
     element: <Root />,
     children: [
       { path: "/", element: <Students /> },
@@ -18,6 +17,8 @@ const router = createBrowserRouter([
       { path: "/students/:id", element: <StudentDetails /> },
     ],
   },
+
+  { path: "*", element: <h1>your Page not found right here</h1> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
