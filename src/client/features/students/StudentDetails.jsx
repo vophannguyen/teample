@@ -1,5 +1,3 @@
-
-//just testing
 import { useGetStudentQuery, useDeleteStudentMutation, useUpdateStudentMutation } from "./studentSlice"
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -39,10 +37,9 @@ export default function StudentDetails() {
       if (!isValid) {
         setMessage("Required: valid email address")
       } else {
-        await updateStudent( id, editStudent ).unwrap();
+        await updateStudent( { id, ...editStudent } ).unwrap();
         e.target.reset();
         setEdit(false);
-        console.log(editStudent);
         navigate(`/students/${id}`);
       }
     } catch (err) {
