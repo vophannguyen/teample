@@ -25,24 +25,32 @@ export default function NewStudentForm() {
       firstName: formData.get("firstName"),
       lastName: formData.get("lastName"),
       email: formData.get("email"),
-      imageUrl: formData.get("imageUrl") || "https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg",
-      gpa: formData.get("gpa") || 0.00,
+      imageUrl:
+        formData.get("imageUrl") ||
+        "https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg",
+      gpa: formData.get("gpa") || 0.0,
     };
 
     //do not dispatch if email is invalid
-      try {
-        if (!isValid) {
-          setMessage("Required: valid email address")
-        } else {
-          await createStudent( newStudent ).unwrap();
-          e.target.reset();
-          navigate("/");
+    try {
+      if (!isValid) {
+        setMessage("Required: valid email address");
+      } else {
+        const response = await createStudent(newStudent).unwrap();
+        // console.log(response);
+        if (response.message) {
+          setMessage(() => response.message);
         }
-      } catch (err) {
-        console.log(err);
-      }
+        if (response.student) {
+          e.target.reset();
+        }
 
-    };
+        navigate("/");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <form className="create-form" type="text" onSubmit={onSubmit}>
@@ -68,7 +76,7 @@ export default function NewStudentForm() {
       <button className="add-btn" type="submit">
         Add Student
       </button>
-      {message && <p>{message}</p>}
+      {message && <div className="mess">{message}</div>}
     </form>
   );
 }
