@@ -9,7 +9,7 @@ const StudentCard = ({ student, onDelete }) => {
       <div className="student-single">
         <img src={student.imageUrl} alt="" />
         <Link to={`/students/${student.id}`} className="details-btn">
-          {student.firstName} {student.lastName}
+          {student.firstName} {student.lastName} GPA: {student.gpa}
         </Link>
       </div>
       <button className="delete-btn" onClick={() => onDelete(student.id)}>
