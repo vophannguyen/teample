@@ -1,4 +1,3 @@
-//just testing
 import {
   useGetStudentQuery,
   useDeleteStudentMutation,
@@ -7,7 +6,7 @@ import {
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-/** Allows user to read, update, and delete a task */
+/** Allows user to read, update, and delete a student */
 export default function StudentDetails() {
   const [deleteStudent] = useDeleteStudentMutation();
   const [message, setMessage] = useState(null);
