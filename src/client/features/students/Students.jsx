@@ -26,6 +26,8 @@ export default function Students() {
   const navigate = useNavigate();
   const [next, setNext] = useState(10);
   const [min, setMin] = useState(0);
+  const [sortData, setSortData] = useState(null);
+  const [controlSort, setControlSort] = useState(true);
   // console.log(students)
   if (isLoading) {
     return <div>Loading....</div>;
@@ -34,8 +36,12 @@ export default function Students() {
     return;
   }
   const max = students.length;
-  const studentOf10 = students.slice(min, next + 1);
+  const studentOf10 = students.slice(min, next);
+  ///////////////////////handle next and previus page student
+  //next button
   const handleNext = function () {
+    setSortData(null);
+    setControlSort(true);
     if (next + 10 > max) {
       setMin(() => next);
       setNext(() => max);
@@ -44,7 +50,10 @@ export default function Students() {
       setNext(() => next + 10);
     }
   };
+  //back button
   function handleBack() {
+    setSortData(null);
+    setControlSort(true);
     if (min - 10 <= 0) {
       setMin(() => 0);
       setNext(() => next - 10);
@@ -61,6 +70,22 @@ export default function Students() {
       console.error(err);
     }
   };
+  ////////////////end handle next and previous page students
+  //////////start handle sort
+  function handleSort() {
+    setControlSort(() => !controlSort);
+    // console.log(controlSort);
+    if (controlSort) {
+      // console.log(controlSort);
+
+      setSortData(() => studentOf10.sort((a, b) => a.gpa - b.gpa));
+      // console.log(studentOf10);
+    } else {
+      setSortData(() => studentOf10.sort((a, b) => b.gpa - a.gpa));
+    }
+  }
+  // studentOf10.sort((a, b) => a.gpa - b.gpa);
+  const newData = sortData ? sortData : studentOf10;
   //additional features: add filter
   return (
     <div className="students">
@@ -68,7 +93,7 @@ export default function Students() {
         <h1>Students</h1>
         {isLoading && <p>Loading student roster...</p>}
         <ul>
-          {studentOf10?.map((student) => (
+          {newData?.map((student) => (
             <StudentCard
               student={student}
               key={student.id}
@@ -91,6 +116,9 @@ export default function Students() {
           ⏮
         </button>
       )}
+      <button className="sort" onClick={handleSort}>
+        {!controlSort ? <div>⏬</div> : <div>⏫</div>}
+      </button>
     </div>
   );
 }
