@@ -57,3 +57,4 @@ Application state is managed with [Redux Toolkit](https://redux-toolkit.js.org/)
 [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) is used to handle data fetching. The central API slice is defined in `src/client/store/api.js` and is intended to stay empty. Additional endpoints should be injected separately in `src/client/features`.
 
 [Less](https://lesscss.org/) is used as the CSS preprocessor.
+# test-server
