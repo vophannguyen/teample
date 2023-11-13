@@ -5,8 +5,10 @@
   "main": "index/server.js",
   "scripts": {
     "dev": "nodemon src/server/index.js",
-    "build": "prisma generate",
-    "start": "vite"
+    "vercel-build": "yarn global add node-gyp",
+    "build": "vite",
+    "start": "vite",
+    "postinstall": "prisma generate"
   },
   "prisma": {
     "schema": "src/server/prisma/schema.prisma",
@@ -15,14 +17,12 @@
   "dependencies": {
     "@prisma/client": "^5.5.2",
     "@reduxjs/toolkit": "^1.9.7",
-    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "less": "^4.2.0",
     "morgan": "^1.10.0",
-    "netlify": "^13.1.10",
     "node": "^21.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
