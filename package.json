@@ -5,8 +5,7 @@
   "main": "index/server.js",
   "scripts": {
     "dev": "nodemon src/server/index.js",
-    "vercel-build": "echo hello",
-    "build": "npm install && vite",
+    "build": "build vite",
     "start": "vite"
   },
   "prisma": {
