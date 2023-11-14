@@ -5,10 +5,9 @@
   "main": "index/server.js",
   "scripts": {
     "dev": "nodemon src/server/index.js",
-    "vercel-build": "yarn global add node-gyp",
-    "build": "vite",
-    "start": "vite",
-    "postinstall": "prisma generate"
+    "vercel-build": "echo hello",
+    "build": "npm install && vite",
+    "start": "vite"
   },
   "prisma": {
     "schema": "src/server/prisma/schema.prisma",

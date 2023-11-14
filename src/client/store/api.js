@@ -7,7 +7,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
  */
 const api = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8080/api",
+    baseUrl: "https://sever-student.vercel.app/api",
   }),
   endpoints: () => ({}),
 });
