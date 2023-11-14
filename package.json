@@ -5,7 +5,7 @@
   "main": "index/server.js",
   "scripts": {
     "dev": "nodemon src/server/index.js",
-    "build": "build vite",
+    "build": "vite build",
     "start": "vite"
   },
   "prisma": {
