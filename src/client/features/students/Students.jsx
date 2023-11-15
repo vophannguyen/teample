@@ -29,7 +29,7 @@ export default function Students() {
   const { data: students, isLoading, isError } = useGetStudentsQuery();
   const [useDelete] = useDeleteStudentMutation();
   const navigate = useNavigate();
-  const [next, setNext] = useState(10);
+  const [next, setNext] = useState(7);
   const [min, setMin] = useState(0);
   const [sortData, setSortData] = useState(null);
   const [controlSort, setControlSort] = useState(true);
@@ -47,24 +47,24 @@ export default function Students() {
   const handleNext = function () {
     setSortData(null);
     setControlSort(true);
-    if (next + 10 > max) {
+    if (next + 7 > max) {
       setMin(() => next);
       setNext(() => max);
     } else {
       setMin(() => next);
-      setNext(() => next + 10);
+      setNext(() => next + 7);
     }
   };
   //back button
   function handleBack() {
     setSortData(null);
     setControlSort(true);
-    if (min - 10 <= 0) {
+    if (min - 7 <= 0) {
       setMin(() => 0);
-      setNext(() => next - 10);
+      setNext(() => 7);
     } else {
-      setMin(() => min - 10);
-      setNext(() => next - 10);
+      setMin(() => min - 7);
+      setNext(() => next - 7);
     }
   }
   const onDelete = async (id) => {
@@ -99,7 +99,7 @@ export default function Students() {
           Students
         </h1>
         {isLoading && <p>Loading student roster...</p>}
-        <ul className="">
+        <ul className="relative">
           {newData?.map((student) => (
             <StudentCard
               student={student}
@@ -108,6 +108,16 @@ export default function Students() {
               onSort={handleSort}
             />
           ))}
+          {next < max && (
+            <button className="absolute right-0" onClick={handleNext}>
+              {`>>>`}
+            </button>
+          )}
+          {min > 0 && (
+            <button className=" absolute left-0" onClick={handleBack}>
+              {`<<<`}
+            </button>
+          )}
         </ul>
       </section>
       <aside className="mt-10 h-[24rem] w-[12rem] flex-initial  rounded-md border-2 border-r border-slate-600 py-4 text-center shadow-2xl lg:w-[15rem]">
@@ -116,16 +126,6 @@ export default function Students() {
         </h2>
         <NewStudentForm />
       </aside>
-      {next < max && (
-        <button className=" absolute" onClick={handleNext}>
-          ⏩
-        </button>
-      )}
-      {min > 0 && (
-        <button className=" absolute" onClick={handleBack}>
-          ⏮
-        </button>
-      )}
     </div>
   );
 }
