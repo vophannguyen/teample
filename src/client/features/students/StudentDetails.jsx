@@ -6,7 +6,7 @@ import {
 } from "./studentSlice";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import "./studentDetails.css";
+import Button from "../../layout/Button";
 
 /** Allows user to read, update, and delete a task */
 export default function StudentDetails() {
@@ -84,8 +84,12 @@ export default function StudentDetails() {
   };
 
   const editForm = (
-    <form className="edit-form" type="text" onSubmit={onSubmit}>
-      <h3>Update Student</h3>
+    <form
+      className="flex h-[40rem] w-[15rem]  flex-col items-center  gap-6 rounded-3xl border-2 bg-slate-300 px-1 shadow-2xl lg:w-[20rem]"
+      type="text"
+      onSubmit={onSubmit}
+    >
+      <h3 className=" mb-6 mt-10 text-2xl font-semibold">Update Student</h3>
       <input name="firstName" type="text" placeholder="Firstname" required />
       <input name="lastName" type="text" placeholder="Lastname" required />
       <input
@@ -105,38 +109,45 @@ export default function StudentDetails() {
         step="0.01"
         placeholder="GPA"
       />
-      <button className="add-btn" type="submit">
+      <Button className="mt-8" type="submit">
         Save
-      </button>
+      </Button>
       {message && <p>{message}</p>}
-      <div className="close" onClick={() => setEdit(() => false)}>
+      <div
+        className="absolute translate-x-[9rem] cursor-pointer"
+        onClick={() => setEdit(() => false)}
+      >
         ✖
       </div>
     </form>
   );
 
   return (
-    <div className="student-container">
+    <div className="flex items-center justify-center gap-8">
       {data ? (
-        <section className="student-details">
-          <article className="col-left">
-            <img src={data.imageUrl} alt={data.firstName} />
-            <h2>First Name: {data.firstName}</h2>
-            <h2>Last Name: {data.lastName}</h2>
-            <h3>GPA: {data.gpa}</h3>
-            <h3>Contact: {data.email}</h3>
+        <section className="h-[40rem] w-[20rem] rounded-3xl border-2 px-8 shadow-xl lg:w-[30rem]">
+          <article className=" mt-10 flex h-[35rem] flex-col gap-4 lg:ml-12">
+            <img
+              src={data.imageUrl}
+              alt={data.firstName}
+              className="w-[20rem] rounded-3xl"
+            />
+            <h2 className=" font-semibold">First Name: {data.firstName}</h2>
+            <h2 className="font-semibold">Last Name: {data.lastName}</h2>
+            <h3 className="font-semibold">GPA: {data.gpa}</h3>
+            <h3 className="font-semibold">Contact: {data.email}</h3>
           </article>
           {!edit && (
-            <aside>
-              <button className="edit-btn" onClick={onEdit}>
+            <aside className="flex gap-8">
+              <Button className="edit-btn" onClick={onEdit}>
                 Edit
-              </button>
-              <button className="delete-btn" onClick={() => onDelete(data.id)}>
+              </Button>
+              <Button className="delete-btn" onClick={() => onDelete(data.id)}>
                 Delete
-              </button>
-              <button className="return-btn" onClick={onNavigate}>
+              </Button>
+              <Button className="return-btn" onClick={onNavigate}>
                 Return
-              </button>
+              </Button>
             </aside>
           )}
         </section>

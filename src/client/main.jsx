@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.less";
 import { Provider } from "react-redux";
 import store from "./store";
 import Students from "./features/students/Students";
 import StudentDetails from "./features/students/StudentDetails";
 import NotFound from "./features/404/NotFound";
 import Root from "./layout/Root.jsx";
+import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const router = createBrowserRouter([
@@ -26,5 +26,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
