@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCreateStudentMutation } from "./studentSlice";
-import "./newstudentform.css";
 
 export default function NewStudentForm() {
   const [createStudent] = useCreateStudentMutation();
@@ -53,7 +52,7 @@ export default function NewStudentForm() {
   };
 
   return (
-    <form className="create-form" type="text" onSubmit={onSubmit}>
+    <form className="flex flex-col  gap-2 px-1" type="text" onSubmit={onSubmit}>
       <input name="firstName" type="text" placeholder="Firstname" required />
       <input name="lastName" type="text" placeholder="Lastname" required />
       <input
@@ -73,7 +72,10 @@ export default function NewStudentForm() {
         step="0.01"
         placeholder="GPA"
       />
-      <button className="add-btn" type="submit">
+      <button
+        className=" mt-4  rounded-full border-2 bg-blue-700 py-1"
+        type="submit"
+      >
         Add Student
       </button>
       {message && <div className="mess">{message}</div>}

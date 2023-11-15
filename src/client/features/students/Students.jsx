@@ -1,21 +1,26 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useGetStudentsQuery, useDeleteStudentMutation } from "./studentSlice";
 import NewStudentForm from "./NewStudentForm";
-import "./Students.less";
 import { useState } from "react";
+import DropDown from "../../layout/DropDown";
 
-const StudentCard = ({ student, onDelete }) => {
+const StudentCard = ({ student, onDelete, onSort }) => {
   return (
-    <li className="student-card">
-      <div className="student-single">
-        <img src={student.imageUrl} alt="" />
-        <Link to={`/students/${student.id}`} className="details-btn">
+    <li className="mb-4 flex justify-between rounded-md border hover:shadow-md">
+      <div className=" ml-4  mr-4 flex items-center  px-2 py-2 ">
+        <img src={student.imageUrl} alt="" className=" w-[4rem]" />
+        <Link to={`/students/${student.id}`} className="">
           {student.firstName} {student.lastName} GPA: {student.gpa}
         </Link>
       </div>
-      <button className="delete-btn" onClick={() => onDelete(student.id)}>
+      {/* <button className="delete-btn" onClick={() => onDelete(student.id)}>
         x
-      </button>
+      </button> */}
+      <DropDown
+        onClick={() => onDelete(student.id)}
+        id={student.id}
+        onSort={onSort}
+      />
     </li>
   );
 };
@@ -88,37 +93,39 @@ export default function Students() {
   const newData = sortData ? sortData : studentOf10;
   //additional features: add filter
   return (
-    <div className="students">
-      <section className="roster">
-        <h1>Students</h1>
+    <div className="flex gap-1 ">
+      <section className="mr-[1rem] w-[25rem] flex-initial px-5 lg:w-[40rem]">
+        <h1 className=" mb-[2rem] border-b border-b-orange-900 py-2 text-center text-2xl">
+          Students
+        </h1>
         {isLoading && <p>Loading student roster...</p>}
-        <ul>
+        <ul className="">
           {newData?.map((student) => (
             <StudentCard
               student={student}
               key={student.id}
               onDelete={onDelete}
+              onSort={handleSort}
             />
           ))}
         </ul>
       </section>
-      <aside className="add-form">
-        <h2>New Student Form</h2>
+      <aside className="mt-10 h-[24rem] w-[12rem] flex-initial  rounded-md border-2 border-r border-slate-600 py-4 text-center shadow-2xl lg:w-[15rem]">
+        <h2 className=" mb-4 text-xl font-semibold sm:text-2xl">
+          New Student Form
+        </h2>
         <NewStudentForm />
       </aside>
       {next < max && (
-        <button className="next" onClick={handleNext}>
+        <button className=" absolute" onClick={handleNext}>
           ⏩
         </button>
       )}
       {min > 0 && (
-        <button className="pre" onClick={handleBack}>
+        <button className=" absolute" onClick={handleBack}>
           ⏮
         </button>
       )}
-      <button className="sort" onClick={handleSort}>
-        {!controlSort ? <div>⏬</div> : <div>⏫</div>}
-      </button>
     </div>
   );
 }
